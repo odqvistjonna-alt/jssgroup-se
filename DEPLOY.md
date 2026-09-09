@@ -67,7 +67,7 @@ publiceras inte.
 
 En sida som körs som en Worker kan bara få ett eget domännamn om domänen ligger i samma
 Cloudflare-konto. Namnservrarna måste alltså flyttas från Simply till Cloudflare. Domänen
-är fortfarande registrerad hos Simply, det är bara DNS som byter hem, och mailen fortsätter
+är fortfarande registrerad hos Simply och det är bara DNS som byter hem. Mailen fortsätter
 att gå till Simply så länge posterna nedan följer med.
 
 Ordningen spelar roll. Lägg in posterna i Cloudflare först, byt namnservrar sist.
@@ -82,8 +82,8 @@ Ordningen spelar roll. Lägg in posterna i Cloudflare först, byt namnservrar si
    Genomslaget tar oftast under en timme, ibland upp till ett dygn.
 5. Öppna Worker-projektet, välj Settings och Domains & Routes, lägg till `jssgroup.se` och
    `www.jssgroup.se` som Custom domain. Certifikatet utfärdas automatiskt.
-6. Skicka ett testmail till jonna@jssgroup.se utifrån, och ett från adressen, för att
-   bekräfta att mailen fungerar efter flytten.
+6. Skicka ett testmail till jonna@jssgroup.se utifrån. Skicka sedan ett från adressen, så
+   att du vet att mailen fungerar i båda riktningarna efter flytten.
 
 #### DNS-poster som fanns hos Simply 2026-09-09
 
