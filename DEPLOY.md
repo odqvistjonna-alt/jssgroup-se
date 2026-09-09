@@ -65,15 +65,41 @@ publiceras inte.
 
 ### Peka domänen till Cloudflare
 
-1. I Pages-projektet, välj Custom domains och lägg till `jssgroup.se` och `www.jssgroup.se`.
-2. Cloudflare visar exakt vilka DNS-poster som ska sättas. Kopiera värdena därifrån, gissa
-   inte, eftersom de ändras över tid.
-3. Logga in på https://www.simply.com, öppna DNS-inställningarna för jssgroup.se och ersätt
-   den nuvarande A-posten `93.191.156.186` för `@` och för `www` med det Cloudflare angav.
-4. Lämna MX-posten `mx.simply.com` orörd. Lämna även TXT-poster för SPF och DKIM orörda.
-   Ändras de slutar mailen till jonna@jssgroup.se att fungera.
-5. Vänta tills ändringen slår igenom, oftast inom en timme. Certifikatet utfärdas
-   automatiskt av Cloudflare.
+En sida som körs som en Worker kan bara få ett eget domännamn om domänen ligger i samma
+Cloudflare-konto. Namnservrarna måste alltså flyttas från Simply till Cloudflare. Domänen
+är fortfarande registrerad hos Simply, det är bara DNS som byter hem, och mailen fortsätter
+att gå till Simply så länge posterna nedan följer med.
+
+Ordningen spelar roll. Lägg in posterna i Cloudflare först, byt namnservrar sist.
+
+1. Öppna DNS-inställningarna hos Simply och skriv av alla poster, eller ta en skärmbild.
+   Listan nedan är hämtad utifrån 2026-09-09, men poster som DKIM-nycklar går inte att läsa
+   utifrån, så panelen hos Simply är facit.
+2. I Cloudflare, välj Add a domain och skriv `jssgroup.se`. Välj gratisplanen, Free.
+3. Cloudflare läser av befintliga poster automatiskt. Jämför resultatet mot listan nedan och
+   lägg till det som saknas för hand, särskilt allt som rör mail.
+4. Först när posterna stämmer, byt namnservrar hos Simply till de två som Cloudflare anger.
+   Genomslaget tar oftast under en timme, ibland upp till ett dygn.
+5. Öppna Worker-projektet, välj Settings och Domains & Routes, lägg till `jssgroup.se` och
+   `www.jssgroup.se` som Custom domain. Certifikatet utfärdas automatiskt.
+6. Skicka ett testmail till jonna@jssgroup.se utifrån, och ett från adressen, för att
+   bekräfta att mailen fungerar efter flytten.
+
+#### DNS-poster som fanns hos Simply 2026-09-09
+
+| Typ | Namn | Värde | Varför |
+| --- | --- | --- | --- |
+| MX | @ | `10 mx.simply.com` | All inkommande mail |
+| TXT | @ | `v=spf1 include:spf.simply.com -all` | SPF, avgör vem som får skicka i ditt namn |
+| CNAME | _dmarc | `dmarc.simply.com` | DMARC, står på `p=reject` |
+| CNAME | autoconfig | `maildiscover.simply.com` | Automatisk kontoinställning i mailprogram |
+| A | mail, webmail, smtp, imap, pop | `93.191.156.186` | Mailklienter och webbmail |
+| A | ftp, cpanel, autodiscover | `93.191.156.186` | Filöverföring och kontrollpanel |
+| A | @ och www | `93.191.156.186` | Webben. Dessa två ersätts av Cloudflare |
+
+Bara de två sista raderna ska ändras. Allt annat ska se likadant ut efter flytten som före.
+SPF-posten står på `-all` och DMARC på `p=reject`, vilket betyder att felaktiga poster inte
+ger vilsen mail utan avvisad mail. Därför är jämförelsen i steg 3 viktig.
 
 Efter det publiceras varje ändring genom att du kör `git push`. Cloudflare bygger om sidan
 av sig själv.
