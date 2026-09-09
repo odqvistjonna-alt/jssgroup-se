@@ -90,7 +90,7 @@ Uppdateringar görs genom att ladda upp filerna på nytt.
 
 ## Checklista inför Apples verifiering
 
-- [ ] Organisationsnumret ifyllt i sidfoten. Sök på `XXXXXX-XXXX` i `index.html`.
+- [x] Organisationsnumret ifyllt i sidfoten, 559501-6162.
 - [ ] Sidan nåbar på https://jssgroup.se utan certifikatvarning och utan inloggning.
 - [ ] Namnet i sidfoten identiskt med det juridiska namnet hos Bolagsverket, JSS Group AB.
 - [ ] Mailadressen i ansökan på egen domän, jonna@jssgroup.se.

@@ -37,8 +37,8 @@ mejladress alltid visas med små bokstäver.
 Layouten bygger på en tunn ram runt hela sidan och gott om luft. Brytpunkterna
 ligger på 860 px och 640 px.
 
-## Att göra innan publicering
+## Bolagsuppgifter
 
-Organisationsnumret står som platshållaren `XXXXXX-XXXX` i sidfoten i
-`index.html`. Det måste fyllas i, eftersom Apple matchar uppgifterna mot
-Bolagsverkets register.
+Sidfoten anger bolagets fullständiga juridiska namn, JSS Group AB, tillsammans
+med organisationsnumret 559501-6162. Uppgifterna ska stämma med Bolagsverkets
+register, eftersom Apple matchar mot det vid organisationsverifieringen.
