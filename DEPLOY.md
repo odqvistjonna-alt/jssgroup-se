@@ -85,21 +85,34 @@ Ordningen spelar roll. Lägg in posterna i Cloudflare först, byt namnservrar si
 6. Skicka ett testmail till jonna@jssgroup.se utifrån. Skicka sedan ett från adressen, så
    att du vet att mailen fungerar i båda riktningarna efter flytten.
 
-#### DNS-poster som fanns hos Simply 2026-09-09
+#### DNS-zonen hos Simply, avläst 2026-09-09
 
-| Typ | Namn | Värde | Varför |
+Tio av posterna ska följa med oförändrade. Bara de två markerade med Ändras rör webben.
+
+| Typ | Namn | Värde | Åtgärd |
 | --- | --- | --- | --- |
-| MX | @ | `10 mx.simply.com` | All inkommande mail |
-| TXT | @ | `v=spf1 include:spf.simply.com -all` | SPF, avgör vem som får skicka i ditt namn |
-| CNAME | _dmarc | `dmarc.simply.com` | DMARC, står på `p=reject` |
-| CNAME | autoconfig | `maildiscover.simply.com` | Automatisk kontoinställning i mailprogram |
-| A | mail, webmail, smtp, imap, pop | `93.191.156.186` | Mailklienter och webbmail |
-| A | ftp, cpanel, autodiscover | `93.191.156.186` | Filöverföring och kontrollpanel |
-| A | @ och www | `93.191.156.186` | Webben. Dessa två ersätts av Cloudflare |
+| A | jssgroup.se | `93.191.156.186` | Ändras, pekas om till sidan |
+| A | www | `93.191.156.186` | Ändras, pekas om till sidan |
+| A | `*` | `93.191.156.186` | Behålls. Wildcard som fångar mail, webmail, smtp, imap, pop, ftp och cpanel |
+| MX | jssgroup.se | `10 mx.simply.com` | Behålls. All inkommande mail |
+| TXT | jssgroup.se | `v=spf1 include:spf.simply.com -all` | Behålls. SPF |
+| CNAME | _dmarc | `dmarc.simply.com` | Behålls. DMARC står på `p=reject` |
+| CNAME | simplycom1._domainkey | `dkim1.simply.com` | Behålls. DKIM-nyckel 1 |
+| CNAME | simplycom2._domainkey | `dkim2.simply.com` | Behålls. DKIM-nyckel 2 |
+| CNAME | autoconfig | `maildiscover.simply.com` | Behålls. Kontoinställning i mailprogram |
+| SRV | _autodiscover._tcp | `10 443 maildiscover.simply.com` | Behålls |
+| SRV | _caldavs._tcp | `20 443 dav.simply.com` | Behålls. Kalender |
+| SRV | _carddavs._tcp | `20 443 dav.simply.com` | Behålls. Kontakter |
 
-Bara de två sista raderna ska ändras. Allt annat ska se likadant ut efter flytten som före.
-SPF-posten står på `-all` och DMARC på `p=reject`, vilket betyder att felaktiga poster inte
-ger vilsen mail utan avvisad mail. Därför är jämförelsen i steg 3 viktig.
+Tre saker att vara noggrann med vid flytten:
+
+1. **SRV-posterna.** Cloudflares avläsning missar dem ibland. Öppna varje SRV-rad hos Simply
+   med pennan och skriv av fälten var för sig, alltså prioritet, vikt, port och mål.
+   Cloudflare har ett eget formulär med samma fält.
+2. **Wildcard-posten.** Den ska ligga som DNS only, alltså grått moln, inte orange. Proxade
+   wildcards ingår inte i gratisplanen, och mailtrafiken ska ändå inte gå genom Cloudflare.
+3. **Allt som rör mail ska vara grått moln.** Det gäller autoconfig och wildcard. Posterna
+   med understreck i namnet går inte att proxa, så de blir gråa av sig själva.
 
 Efter det publiceras varje ändring genom att du kör `git push`. Cloudflare bygger om sidan
 av sig själv.
