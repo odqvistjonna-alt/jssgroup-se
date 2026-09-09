@@ -110,7 +110,7 @@ Tre saker att vara noggrann med vid flytten:
    med pennan och skriv av fälten var för sig, alltså prioritet, vikt, port och mål.
    Cloudflare har ett eget formulär med samma fält.
 2. **Wildcard-posten.** Den ska ligga som DNS only, alltså grått moln, inte orange. Proxade
-   wildcards ingår inte i gratisplanen, och mailtrafiken ska ändå inte gå genom Cloudflare.
+   wildcards ingår inte i gratisplanen. Mailtrafiken ska ändå inte gå genom Cloudflare.
 3. **Allt som rör mail ska vara grått moln.** Det gäller autoconfig och wildcard. Posterna
    med understreck i namnet går inte att proxa, så de blir gråa av sig själva.
 
