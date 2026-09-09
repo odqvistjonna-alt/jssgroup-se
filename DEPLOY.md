@@ -100,19 +100,25 @@ Tio av posterna ska följa med oförändrade. Bara de två markerade med Ändras
 | CNAME | simplycom1._domainkey | `dkim1.simply.com` | Behålls. DKIM-nyckel 1 |
 | CNAME | simplycom2._domainkey | `dkim2.simply.com` | Behålls. DKIM-nyckel 2 |
 | CNAME | autoconfig | `maildiscover.simply.com` | Behålls. Kontoinställning i mailprogram |
-| SRV | _autodiscover._tcp | `10 443 maildiscover.simply.com` | Behålls |
-| SRV | _caldavs._tcp | `20 443 dav.simply.com` | Behålls. Kalender |
-| SRV | _carddavs._tcp | `20 443 dav.simply.com` | Behålls. Kontakter |
+| SRV | _autodiscover._tcp | prioritet 10, vikt 10, port 443, mål `maildiscover.simply.com` | Behålls |
+| SRV | _caldavs._tcp | prioritet 10, vikt 20, port 443, mål `dav.simply.com` | Behålls. Kalender |
+| SRV | _carddavs._tcp | prioritet 10, vikt 20, port 443, mål `dav.simply.com` | Behålls. Kontakter |
 
 Tre saker att vara noggrann med vid flytten:
 
-1. **SRV-posterna.** Cloudflares avläsning missar dem ibland. Öppna varje SRV-rad hos Simply
-   med pennan och skriv av fälten var för sig, alltså prioritet, vikt, port och mål.
-   Cloudflare har ett eget formulär med samma fält.
+1. **SRV-posterna.** Cloudflares avläsning tar inte med dem. Lägg in de tre för hand med
+   värdena i tabellen ovan. Frågar formuläret efter Service och Protocol var för sig är
+   det `_autodiscover` respektive `_tcp` för den första, och `_caldavs` eller `_carddavs`
+   med `_tcp` för de andra två.
 2. **Wildcard-posten.** Den ska ligga som DNS only, alltså grått moln, inte orange. Proxade
    wildcards ingår inte i gratisplanen. Mailtrafiken ska ändå inte gå genom Cloudflare.
-3. **Allt som rör mail ska vara grått moln.** Det gäller autoconfig och wildcard. Posterna
-   med understreck i namnet går inte att proxa, så de blir gråa av sig själva.
+3. **Allt som rör mail ska vara grått moln.** Cloudflare sätter orange moln som förval på
+   det den hittar, även på `_dmarc` och `autoconfig`. Orange moln på wildcard-posten slår ut
+   mailklienterna, eftersom proxyn bara hanterar webbtrafik och inte portarna för imap och
+   smtp. Orange moln på `_dmarc` gör att DMARC-uppslaget inte hittar någon post.
+
+Cloudflares avläsning hittade sju av tolv poster. Fem fick läggas till för hand, alltså de
+två DKIM-nycklarna och de tre SRV-posterna.
 
 Efter det publiceras varje ändring genom att du kör `git push`. Cloudflare bygger om sidan
 av sig själv.
