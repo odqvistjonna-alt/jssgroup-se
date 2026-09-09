@@ -108,8 +108,8 @@ Tre saker att vara noggrann med vid flytten:
 
 1. **SRV-posterna.** Cloudflares avläsning tar inte med dem. Lägg in de tre för hand med
    värdena i tabellen ovan. Frågar formuläret efter Service och Protocol var för sig är
-   det `_autodiscover` respektive `_tcp` för den första, och `_caldavs` eller `_carddavs`
-   med `_tcp` för de andra två.
+   det `_autodiscover` respektive `_tcp` för den första. För de andra två gäller `_caldavs`
+   eller `_carddavs` tillsammans med `_tcp`.
 2. **Wildcard-posten.** Den ska ligga som DNS only, alltså grått moln, inte orange. Proxade
    wildcards ingår inte i gratisplanen. Mailtrafiken ska ändå inte gå genom Cloudflare.
 3. **Allt som rör mail ska vara grått moln.** Cloudflare sätter orange moln som förval på
