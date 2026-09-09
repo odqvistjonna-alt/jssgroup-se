@@ -1,0 +1,8 @@
+{
+  // Statisk sida utan serverkod. Allt som ligger i public serveras som det är.
+  "name": "jssgroup-se",
+  "compatibility_date": "2026-09-09",
+  "assets": {
+    "directory": "./public"
+  }
+}

@@ -1,8 +1,8 @@
 # Publicera jssgroup.se
 
-Sidan är statisk. Två filer räcker, `index.html` och `styles.css`. Inget byggsteg, ingen
-server och ingen databas. Det som krävs är att filerna ligger någonstans som svarar på
-jssgroup.se över HTTPS.
+Sidan är statisk. Två filer räcker, `public/index.html` och `public/styles.css`. Inget
+byggsteg, ingen server och ingen databas. Det som krävs är att filerna ligger någonstans
+som svarar på jssgroup.se över HTTPS.
 
 ## Läget just nu
 
@@ -48,15 +48,20 @@ git push -u origin main
 GitHub frågar efter inloggning. Det enklaste är att installera GitHubs eget verktyg med
 `brew install gh` och köra `gh auth login` en gång, då sköts inloggningen automatiskt.
 
-### Koppla Cloudflare Pages
+### Koppla Cloudflare
 
-1. Skapa ett konto på https://dash.cloudflare.com om du inte har ett.
-2. Välj Workers & Pages, sedan Create, sedan Pages, sedan Connect to Git.
+1. Skapa ett konto på https://dash.cloudflare.com om du inte har ett. Inloggning med
+   GitHub-kontot fungerar.
+2. På startsidan, välj Create app under Ship something new, sedan importera från Git.
 3. Godkänn åtkomst till GitHub-kontot och välj repot `jssgroup-se`.
-4. I byggkonfigurationen: välj None som ramverk, lämna byggkommandot tomt och lämna
-   output-katalogen tom eller sätt den till `/`. Sidan behöver inget byggsteg.
-5. Klicka Save and Deploy. Efter ungefär en minut ligger sidan på en adress som slutar på
-   `pages.dev`. Öppna den och kontrollera att allt ser rätt ut.
+4. Projektnamnet ska vara `jssgroup-se`, samma namn som står i `wrangler.jsonc`.
+   Byggkommandot lämnas tomt. Deploy-kommandot är `npx wrangler deploy`.
+5. Klicka Deploy. Efter ungefär en minut ligger sidan på en adress som slutar på
+   `workers.dev`. Öppna den och kontrollera att allt ser rätt ut.
+
+Konfigurationen ligger i `wrangler.jsonc` och säger att mappen `public` ska publiceras
+som statiska filer. Ingen serverkod körs. Filer utanför `public`, som den här texten,
+publiceras inte.
 
 ### Peka domänen till Cloudflare
 
@@ -80,8 +85,9 @@ Ingen DNS ändras och mailen påverkas inte.
 1. Logga in på https://www.simply.com och välj jssgroup.se.
 2. Kontrollera att webbhotellet är aktiverat för domänen.
 3. Öppna filhanteraren, eller anslut med SFTP med uppgifterna i kontrollpanelen.
-4. Ladda upp `index.html` och `styles.css` till webbrotens mapp, oftast `public_html`.
-   Filerna ska ligga direkt i mappen, inte i en undermapp.
+4. Ladda upp innehållet i mappen `public`, alltså `index.html` och `styles.css`, till
+   webbrotens mapp, oftast `public_html`. Filerna ska ligga direkt i den mappen, inte i
+   en undermapp.
 5. Aktivera gratis SSL, Let's Encrypt, under SSL i kontrollpanelen.
 6. Slå på omdirigering från http till https. Välj sedan en variant, med www eller utan.
 7. Öppna https://jssgroup.se och kontrollera att hänglåset visas.

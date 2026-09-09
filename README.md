@@ -10,18 +10,22 @@ Apple Developer Program, som kontrollerar att domänen hör till företaget.
 
 | Fil | Innehåll |
 | --- | --- |
-| `index.html` | All text och struktur |
-| `styles.css` | All design |
+| `public/index.html` | All text och struktur |
+| `public/styles.css` | All design |
+| `wrangler.jsonc` | Konfiguration för Cloudflare, pekar ut `public` som den mapp som publiceras |
 | `DEPLOY.md` | Hur sidan publiceras på jssgroup.se |
+
+Allt som ska ligga öppet på webben ligger i `public`. Dokumentationen ligger utanför
+den mappen, så README och DEPLOY publiceras inte tillsammans med sidan.
 
 ## Utveckling
 
-Det finns inget byggsteg. Öppna `index.html` direkt i webbläsaren, redigera och
-ladda om. Vill du hellre köra sidan över http gör du det med Pythons inbyggda
+Det finns inget byggsteg. Öppna `public/index.html` direkt i webbläsaren, redigera
+och ladda om. Vill du hellre köra sidan över http gör du det med Pythons inbyggda
 server:
 
 ```
-python3 -m http.server 4321
+python3 -m http.server 4321 --directory public
 ```
 
 Sidan ligger sedan på http://localhost:4321.
