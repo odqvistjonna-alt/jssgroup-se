@@ -4,18 +4,34 @@ Sidan är statisk. Två filer räcker, `public/index.html` och `public/styles.cs
 byggsteg, ingen server och ingen databas. Det som krävs är att filerna ligger någonstans
 som svarar på jssgroup.se över HTTPS.
 
-## Läget just nu
+## Så här ser uppsättningen ut, klar 2026-09-10
 
-Domänen är uppslagen 2026-09-09:
+- Domänen är registrerad hos **Simply.com** och ligger kvar där
+- DNS sköts av **Cloudflare**, namnservrarna är `casey.ns.cloudflare.com` och `val.ns.cloudflare.com`
+- Mailen går fortfarande till Simply, styrd av MX, SPF, DKIM och DMARC i Cloudflares zon
+- Sidan körs som en **Cloudflare Worker** som serverar mappen `public`
+- `jssgroup.se` och `www.jssgroup.se` är kopplade som Custom domains till Workern
+- Certifikatet är utfärdat av Let's Encrypt och förnyas automatiskt
+- Varje `git push` till grenen `main` bygger om och publicerar sidan
 
-- Namnservrar: `ns1.simply.com`, `ns2.simply.com`, `ns3.simply.com`
-- A-post för både jssgroup.se och www: `93.191.156.186`, en server hos Simply.com
-- MX-post: `mx.simply.com`, alltså ligger mailen för jonna@jssgroup.se hos Simply
-- HTTPS: servern svarar med ett certifikat utfärdat för `simply.com`, inte för jssgroup.se
+Att uppdatera sidan görs alltså med `git push`, inget annat.
 
-Domänen ligger alltså hos Simply.com och pekar redan mot deras webbhotell, men inget eget
-innehåll är publicerat och certifikatet för domänen är inte utfärdat. Det sista är viktigt,
-eftersom Apple behöver nå https://jssgroup.se utan certifikatvarning.
+### Två saker kvar att göra när du vill
+
+**Tvinga https.** I Cloudflare, under SSL/TLS och Edge Certificates, slå på Always Use HTTPS.
+Utan den svarar `http://jssgroup.se` utan att skicka besökaren vidare till den säkra adressen.
+
+**Slå på DNSSEC igen.** Det stängdes av inför flytten. Nu görs det i rätt ordning, vilket
+betyder att det inte uppstår något glapp:
+
+1. I Cloudflare, DNS och Settings, välj Enable DNSSEC. Cloudflare börjar signera zonen och
+   visar en DS-post.
+2. Logga in hos Simply, öppna DNSSEC-sidan för jssgroup.se och lägg in den DS-posten i
+   fälten för Nyckel 1.
+3. Klart. Signeringen finns på plats innan registret får veta att den ska finnas, vilket är
+   motsatsen till ordningen som orsakade avbrottet vid avstängningen.
+
+## Historik, flytten steg för steg
 
 ## Val av leverantör
 
