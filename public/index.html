@@ -17,25 +17,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js-anim");</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="frame" aria-hidden="true"></div>
 
 <a class="skip" href="#hero">Hoppa till innehåll</a>
 
 <header class="site-header">
   <div class="inner header-row">
-    <a class="wordmark" href="#hero">JSS<span class="wordmark-sub">Group AB</span></a>
+    <a class="wordmark" href="#hero"><img src="logo.png" alt="JSS Group" width="998" height="608"></a>
 
     <nav class="nav" aria-label="Huvudmeny">
-      <a href="#tjanster">Tjänster</a>
-      <a href="#projekt">Projekt</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#tjanster"><span class="roll"><span class="roll-line">Tjänster</span><span class="roll-line" aria-hidden="true">Tjänster</span></span></a>
+      <a href="#projekt"><span class="roll"><span class="roll-line">Projekt</span><span class="roll-line" aria-hidden="true">Projekt</span></span></a>
+      <a href="#kontakt"><span class="roll"><span class="roll-line">Kontakt</span><span class="roll-line" aria-hidden="true">Kontakt</span></span></a>
     </nav>
 
-    <a class="btn btn-primary btn-sm header-cta" href="mailto:jonna@jssgroup.se">Hör av dig</a>
+    <a class="btn btn-primary btn-sm header-cta" href="mailto:hej@jssgroup.se"><span class="roll"><span class="roll-line">Hör av dig</span><span class="roll-line" aria-hidden="true">Hör av dig</span></span></a>
   </div>
 </header>
 
@@ -43,23 +42,11 @@
 
   <section id="hero" class="hero">
     <div class="inner">
-      <p class="label">Försäljning &amp; IT-utveckling</p>
-
-      <h1 class="hero-title">
-        <span>JSS Group</span>
-        <span>AB</span>
-      </h1>
-
       <div class="hero-bottom">
-        <p class="lead">
+        <h1 class="lead">
           Hjälper företag att växa. Konsultativ B2B-försäljning och digitala
           lösningar, från hemsidor till appar.
-        </p>
-
-        <div class="btn-row">
-          <a class="btn btn-primary" href="mailto:jonna@jssgroup.se">Hör av dig</a>
-          <a class="btn btn-ghost" href="#tjanster">Se tjänster</a>
-        </div>
+        </h1>
       </div>
     </div>
   </section>
@@ -84,12 +71,12 @@
         <article class="card">
           <h2 class="card-title">IT-utveckling</h2>
           <p>
-            Hemsidor och mobilappar. Från enkel företagssida till plattform med
-            inloggning, databas och betalning.
+            Hemsidor och appar. Från enkla företagssidor till mer avancerade
+            lösningar med inloggning, databaser och betalningar.
           </p>
           <p>
-            Jag tar hand om hela kedjan, från idé till publicerad sida eller app
-            i butiken.
+            Hela vägen från första idé till en färdig, publicerad webbplats
+            eller app.
           </p>
         </article>
       </div>
@@ -98,36 +85,73 @@
 
   <section id="projekt" class="section">
     <div class="inner">
-      <details class="disclosure">
-        <summary class="disclosure-summary">
-          <h2 class="disclosure-title">Projekt</h2>
-          <span class="disclosure-icon" aria-hidden="true"></span>
-        </summary>
 
-        <ul class="projects">
-          <li class="project">
-            <h3 class="project-title">AFTR</h3>
-            <p class="project-text">
-              Marknadsplats för DJ-bokningar. Plattform med profilsidor, sökning
-              och bokningsflöde.
-            </p>
-            <p class="project-meta">
-              <a class="project-link" href="https://aftr.se" target="_blank" rel="noopener">
-                aftr.se <span aria-hidden="true">↗</span>
-              </a>
-            </p>
-          </li>
+      <div class="pr-head">
+        <h2 class="pr-label">Projekt</h2>
+        <span class="pr-dash" aria-hidden="true"></span>
+      </div>
 
-          <li class="project">
-            <h3 class="project-title">Totalen</h3>
-            <p class="project-text">
-              Mobilapp för svenska hushåll som samlar alla fasta kostnader på ett
-              ställe och påminner när avtal går att omförhandla. iOS och Android.
-            </p>
-            <p class="project-meta"><span class="tag">Under utveckling</span></p>
-          </li>
-        </ul>
-      </details>
+      <article class="pr-item">
+        <div class="pr-info">
+          <h3 class="pr-title">AFTR</h3>
+
+          <p class="pr-desc">
+            Marknadsplats för DJ-bokningar. Plattform med profilsidor, sökning
+            och bokningsflöde.
+          </p>
+
+          <p class="pr-meta">Webbdesign · UX/UI · Utveckling</p>
+
+          <p class="pr-visit">
+            <a class="project-link" href="https://aftr.se" target="_blank" rel="noopener"><span class="roll"><span class="roll-line">aftr.se <span aria-hidden="true">↗</span></span><span class="roll-line" aria-hidden="true">aftr.se <span aria-hidden="true">↗</span></span></span></a>
+          </p>
+        </div>
+
+        <!-- Den ljusgrå rutan byts automatiskt mot bilden så fort filen finns
+             på public/images/projekt/aftr-enheter.png -->
+        <div class="pr-media" role="img"
+             aria-label="AFTR:s webbplats på laptop och mobil"></div>
+      </article>
+
+      <dl class="pr-facts">
+        <div class="pr-fact">
+          <dt class="pr-label">Uppdrag</dt>
+          <dd class="pr-fact-text">
+            Webbdesign · UX/UI · Utveckling · Koncept · Responsiv design
+          </dd>
+        </div>
+
+        <div class="pr-fact">
+          <dt class="pr-label">Leverans</dt>
+          <dd class="pr-fact-text">
+            Digital plattform med profilsidor, sökning och bokningsflöde.
+          </dd>
+        </div>
+
+        <div class="pr-fact">
+          <dt class="pr-label">Besök</dt>
+          <dd class="pr-fact-text">
+            <a class="project-link" href="https://aftr.se" target="_blank" rel="noopener"><span class="roll"><span class="roll-line">aftr.se <span aria-hidden="true">↗</span></span><span class="roll-line" aria-hidden="true">aftr.se <span aria-hidden="true">↗</span></span></span></a>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="pr-head pr-head-next">
+        <h2 class="pr-label">Kommande</h2>
+        <span class="pr-dash" aria-hidden="true"></span>
+      </div>
+
+      <ul class="projects">
+        <li class="project">
+          <h3 class="project-title">Totalen</h3>
+          <p class="project-text">
+            Mobilapp för svenska hushåll som samlar alla fasta kostnader på ett
+            ställe och påminner när avtal går att omförhandla. iOS och Android.
+          </p>
+          <p class="project-meta"><span class="tag">Under utveckling</span></p>
+        </li>
+      </ul>
+
     </div>
   </section>
 
@@ -135,7 +159,7 @@
     <div class="inner">
       <p class="label">Kontakt</p>
       <p class="contact-lead">Vill du komma i kontakt? Hör av dig.</p>
-      <a class="contact-mail" href="mailto:jonna@jssgroup.se">jonna@jssgroup.se</a>
+      <a class="contact-mail" href="mailto:hej@jssgroup.se">hej@jssgroup.se</a>
     </div>
   </section>
 
@@ -147,9 +171,12 @@
     <span aria-hidden="true" class="dot">·</span>
     <span>Org.nr 559501-6162</span>
     <span aria-hidden="true" class="dot">·</span>
-    <a href="mailto:jonna@jssgroup.se">jonna@jssgroup.se</a>
+    <a href="mailto:hej@jssgroup.se">hej@jssgroup.se</a>
   </div>
 </footer>
+
+<script src="script.js" defer
+        onerror="document.documentElement.classList.remove('js-anim')"></script>
 
 </body>
 </html>
