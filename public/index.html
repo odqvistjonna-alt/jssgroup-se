@@ -107,10 +107,14 @@
           </p>
         </div>
 
-        <!-- Den ljusgrå rutan byts automatiskt mot bilden så fort filen finns
-             på public/images/projekt/aftr-enheter.png -->
-        <div class="pr-media" role="img"
-             aria-label="AFTR:s webbplats på laptop och mobil"></div>
+        <div class="pr-media">
+          <picture>
+            <source srcset="images/projekt/aftr-enheter.webp" type="image/webp">
+            <img src="images/projekt/aftr-enheter.png"
+                 alt="AFTR:s webbplats på laptop och mobil"
+                 width="1400" height="1050" loading="lazy" decoding="async">
+          </picture>
+        </div>
       </article>
 
       <dl class="pr-facts">
