@@ -175,7 +175,7 @@ a { color: inherit; }
 
 .hero {
   padding-top: clamp(24px, 6vw, 70px);
-  padding-bottom: clamp(70px, 12vw, 150px);
+  padding-bottom: clamp(28px, 4vw, 56px);
 }
 
 /* Avståndet ner till Tjänster. Övriga sektioner behåller sin luft. */
