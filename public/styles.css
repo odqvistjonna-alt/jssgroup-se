@@ -174,8 +174,8 @@ a { color: inherit; }
 /* ---------- Hero ---------- */
 
 .hero {
-  padding-top: clamp(12px, 2.5vw, 32px);
-  padding-bottom: clamp(24px, 4vw, 48px);
+  padding-top: clamp(24px, 6vw, 70px);
+  padding-bottom: clamp(70px, 12vw, 150px);
 }
 
 /* Avståndet ner till Tjänster. Övriga sektioner behåller sin luft. */
@@ -204,12 +204,12 @@ a { color: inherit; }
   align-items: flex-end;
   justify-content: space-between;
   gap: clamp(32px, 5vw, 64px);
-  padding-top: clamp(14px, 2vw, 26px);
+  border-top: 1px solid var(--line-soft);
+  padding-top: clamp(28px, 4vw, 46px);
 }
 
 .lead {
   max-width: 34ch;
-  font-weight: 400;
   font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.85rem);
   line-height: 1.35;
   margin: 0;
